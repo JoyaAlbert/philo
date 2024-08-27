@@ -19,6 +19,9 @@ typedef struct s_start_data
 typedef struct s_philos
 {
     int eated;
+    int fork_1;
+    int fork_2;
+
 } t_philos;
 
 

@@ -42,7 +42,7 @@ int mutexcreate(t_data *data)
 	return 0;
 }
 
-int  startdata(t_data *data)
+int  startdata(t_data *data, t_philos *philos)
 {
 	data->threads = malloc(sizeof(pthread_t *) * (data->phi_num));
 	if (data->threads == NULL)
@@ -57,7 +57,9 @@ int  startdata(t_data *data)
 int	main(int argc, char **argv)
 {
 	t_data *data;
+	t_philos *philos;
 
+	philos = NULL;
 	data = NULL;
 	if (argc < 5 || argc > 6)
 		printf("Input example-> ./philo 5 800 200 200 7(optional)\n");
@@ -65,7 +67,7 @@ int	main(int argc, char **argv)
 	{
 		if(datatake(argv, data) == -1)
 			return (0);
-		if(startdata == -1)
+		if(startdata(data, philos) == -1)
 			return (0);
 	}
 	return (0);
