@@ -29,6 +29,31 @@ int datatake(char **argv, t_data *data)
 	return 0;
 }
 
+int mutexcreate(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while(i < data->phi_num)
+	{
+		if(pthread_mutex_init(&data->mutex[i], NULL) != 0)
+			return (-1);
+	}
+	return 0;
+}
+
+int  startdata(t_data *data)
+{
+	data->threads = malloc(sizeof(pthread_t *) * (data->phi_num));
+	if (data->threads == NULL)
+		return (-1);
+	data->mutex = malloc(sizeof(pthread_mutex_t *) * (data->phi_num));
+	if (data->threads == NULL)
+		return (-1);
+	if (mutexcreate(data) == -1)
+		retrun (-1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data *data;
@@ -39,6 +64,8 @@ int	main(int argc, char **argv)
 	else
 	{
 		if(datatake(argv, data) == -1)
+			return (0);
+		if(startdata == -1)
 			return (0);
 	}
 	return (0);

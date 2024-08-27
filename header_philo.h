@@ -3,15 +3,23 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <pthread.h>
 
-typedef struct t_start_data
+typedef struct s_start_data
 {
     int phi_num;
     int ttd;
     int tte;
     int tts;
     int n_toeat;
+    pthread_t *threads;
+    pthread_mutex_t *mutex;
 } t_data;
+
+typedef struct s_philos
+{
+    int eated;
+} t_philos;
 
 
 
